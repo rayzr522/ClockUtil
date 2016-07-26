@@ -1,0 +1,14 @@
+settings:
+  debug: false
+  items:
+    # COMPASS: default
+  defaultMenu: default
+  default:
+    title: Your text here
+    rows: 3
+    '1':
+      name: Your text here
+      id: STONE
+      commands:
+      - say Your text here
+      inventory: default
