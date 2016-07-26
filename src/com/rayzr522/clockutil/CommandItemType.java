@@ -48,7 +48,7 @@ public class CommandItemType implements ICommand {
 	@Override
 	public void showHelp(CommandSender sender) {
 
-		sender.sendMessage(ChatColor.GOLD + "USAGE:" + ChatColor.YELLOW + "/itemtype");
+		sender.sendMessage(ChatColor.GOLD + "USAGE: " + ChatColor.YELLOW + "/itemtype");
 
 	}
 

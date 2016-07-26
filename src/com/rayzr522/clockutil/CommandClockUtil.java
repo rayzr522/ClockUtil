@@ -48,7 +48,7 @@ public class CommandClockUtil implements ICommand {
 	@Override
 	public void showHelp(CommandSender sender) {
 
-		sender.sendMessage(ChatColor.GOLD + "USAGE:" + ChatColor.YELLOW + "/clockutil <reload|version>");
+		sender.sendMessage(ChatColor.GOLD + "USAGE: " + ChatColor.YELLOW + "/clockutil <reload|version>");
 
 	}
 

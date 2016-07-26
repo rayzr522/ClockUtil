@@ -72,7 +72,7 @@ public class CommandMenu implements ICommand {
 	@Override
 	public void showHelp(CommandSender sender) {
 
-		sender.sendMessage(ChatColor.GOLD + "USAGE:" + ChatColor.YELLOW + "/menu [name]");
+		sender.sendMessage(ChatColor.GOLD + "USAGE: " + ChatColor.YELLOW + "/menu [name]");
 
 	}
 
