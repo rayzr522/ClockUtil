@@ -26,7 +26,7 @@ public class CommandClockUtil implements ICommand {
 
 			if (arg.equals("reload")) {
 
-				plugin.reloadConfig();
+				plugin.reload();
 				sender.sendMessage(ChatColor.GOLD + "Config reloaded!");
 
 			} else if (arg.equals("version")) {

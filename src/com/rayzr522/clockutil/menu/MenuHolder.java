@@ -1,5 +1,5 @@
 
-package com.rayzr522.clockutil;
+package com.rayzr522.clockutil.menu;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;

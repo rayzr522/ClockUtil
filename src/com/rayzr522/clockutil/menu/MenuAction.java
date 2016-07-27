@@ -1,9 +1,13 @@
 
-package com.rayzr522.clockutil;
+package com.rayzr522.clockutil.menu;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.entity.Player;
+
+import com.rayzr522.clockutil.menu.action.MenuActionCommand;
+import com.rayzr522.clockutil.menu.action.MenuActionMenu;
 import com.rayzr522.clockutil.utils.TextUtils;
 
 public class MenuAction {
@@ -16,7 +20,7 @@ public class MenuAction {
 	private MenuAction(ActionType type, String data) {
 
 		this.type = type;
-		this.data = data;
+		this.data = data.trim();
 
 	}
 
@@ -34,6 +38,22 @@ public class MenuAction {
 		}
 
 		return actions;
+
+	}
+
+	public void execute(Player player) {
+
+		switch (type) {
+
+		case COMMAND:
+			new MenuActionCommand().execute(player, data);
+			break;
+		case MENU:
+			new MenuActionMenu().execute(player, data);
+			break;
+		default:
+
+		}
 
 	}
 

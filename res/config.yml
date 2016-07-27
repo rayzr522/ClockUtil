@@ -1,14 +1,18 @@
 settings:
   debug: false
-  items:
-    # COMPASS: default
+  silentMenuPermissions: false
   defaultMenu: default
+items:
+    WATCH: default
+menus:
   default:
-    title: Your text here
-    rows: 3
-    '1':
-      name: Your text here
-      id: STONE
-      commands:
-      - say Your text here
-      inventory: default
+    title: '&4Your text here'
+    rows: 2
+    items:
+      Stone:
+        name: '&6Your text here'
+        type: stone
+        slot: 5
+        actions:
+        - command:say Your text here
+        - menu:default

@@ -1,5 +1,5 @@
 
-package com.rayzr522.clockutil;
+package com.rayzr522.clockutil.menu;
 
 import java.util.List;
 
@@ -60,7 +60,10 @@ public class MenuItem {
 			}
 		}
 
-		return new MenuItem(new ItemStack(ItemUtils.getType(typeString[0]), 1, damage), section.getInt("slot"), section.getString("permission"), MenuAction.getActions(section.getStringList("actions")));
+		ItemStack item = new ItemStack(ItemUtils.getType(typeString[0]), 1, damage);
+		ItemUtils.nameItem(item, section.getString("name"));
+
+		return new MenuItem(item, section.getInt("slot") - 1, section.getString("permission"), MenuAction.getActions(section.getStringList("actions")));
 
 	}
 
@@ -69,11 +72,11 @@ public class MenuItem {
 		return item;
 
 	}
-	
+
 	public int getSlot() {
-		
+
 		return slot;
-		
+
 	}
 
 	public List<MenuAction> getActions() {
@@ -85,6 +88,16 @@ public class MenuItem {
 	public boolean hasPermission(Player player) {
 
 		return (permission == null || permission.equals("") || player.hasPermission(permission));
+
+	}
+
+	public void executeActions(Player player) {
+
+		for (MenuAction action : actions) {
+
+			action.execute(player);
+
+		}
 
 	}
 
