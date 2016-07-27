@@ -23,4 +23,10 @@ public class TextUtils {
 
 	}
 
+	public static String enumFormat(String text) {
+
+		return text.trim().toUpperCase().replace(" ", "_");
+
+	}
+
 }

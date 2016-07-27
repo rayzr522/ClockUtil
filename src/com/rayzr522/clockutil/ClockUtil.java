@@ -32,7 +32,7 @@ public class ClockUtil extends JavaPlugin implements Listener {
 	public static final String		HORIZONTAL_BAR	= ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + Strings.repeat("-", 53);
 	public static boolean			DEBUG			= false;
 
-	private HashMap<UUID, String>	openClocks;
+	private HashMap<UUID, String>	openMenus;
 
 	private Logger					logger;
 	public final ClockUtil			plugin			= this;
@@ -40,23 +40,42 @@ public class ClockUtil extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 
+		initVariables();
+		loadConfig();
+		registerCommands();
+		loadMenus();
+
+		logger.info(getInfo() + ChatColor.GOLD + " disabled");
+
+		getServer().getPluginManager().registerEvents(this, this);
+
+	}
+
+	private void initVariables() {
+
 		logger = getLogger();
+		openMenus = new HashMap<UUID, String>();
+
+	}
+
+	private void loadConfig() {
 
 		getConfig().options().copyDefaults(false);
 		saveConfig();
 
 		DEBUG = getConfig().getBoolean("settings.debug");
 
+	}
+
+	private void registerCommands() {
+
 		getCommand("clockutil").setExecutor(new CommandClockUtil(this));
 		getCommand("menu").setExecutor(new CommandMenu(this));
 		getCommand("itemtype").setExecutor(new CommandItemType(this));
 
-		logger.info(getInfo() + ChatColor.GOLD + " disabled");
+	}
 
-		getServer().getPluginManager().registerEvents(this, this);
-
-		openClocks = new HashMap<UUID, String>();
-
+	private void loadMenus() {
 	}
 
 	@Override
@@ -173,7 +192,7 @@ public class ClockUtil extends JavaPlugin implements Listener {
 		}
 
 		player.openInventory(inventory);
-		this.openClocks.put(player.getUniqueId(), name);
+		this.openMenus.put(player.getUniqueId(), name);
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
@@ -211,7 +230,7 @@ public class ClockUtil extends JavaPlugin implements Listener {
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onInventoryClose(InventoryCloseEvent e) {
 
-		this.openClocks.remove(e.getPlayer().getUniqueId());
+		this.openMenus.remove(e.getPlayer().getUniqueId());
 
 	}
 
@@ -220,11 +239,11 @@ public class ClockUtil extends JavaPlugin implements Listener {
 
 		Player player = (Player) e.getView().getPlayer();
 		UUID id = player.getUniqueId();
-		String name = this.openClocks.get(id);
+		String name = this.openMenus.get(id);
 
 		ConfigurationSection clock = getConfig().getConfigurationSection("settings." + name);
 
-		if (this.openClocks.containsKey(id)) {
+		if (this.openMenus.containsKey(id)) {
 
 			e.setCancelled(true);
 			int slot = e.getRawSlot() + 1;
@@ -268,7 +287,7 @@ public class ClockUtil extends JavaPlugin implements Listener {
 		Player player = e.getPlayer();
 		UUID id = player.getUniqueId();
 
-		if (this.openClocks.containsKey(id)) {
+		if (this.openMenus.containsKey(id)) {
 
 			player.setVelocity(new Vector(0.0f, 0.0f, 0.0f));
 
