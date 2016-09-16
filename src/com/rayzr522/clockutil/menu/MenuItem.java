@@ -63,7 +63,20 @@ public class MenuItem {
 		ItemStack item = new ItemStack(ItemUtils.getType(typeString[0]), 1, damage);
 		ItemUtils.nameItem(item, section.getString("name"));
 
-		return new MenuItem(item, section.getInt("slot") - 1, section.getString("permission"), MenuAction.getActions(section.getStringList("actions")));
+		int slot = 0;
+		String slotText = section.getString("slot").replace(" ", "");
+		if (slotText.indexOf(",") != -1) {
+			String[] split = slotText.split(",");
+			try {
+				slot = Integer.parseInt(split[0]) - 1 + (Integer.parseInt(split[1]) - 1) * 9;
+			} catch (Exception e) {
+
+			}
+		} else {
+			slot = section.getInt("slot") - 1;
+		}
+
+		return new MenuItem(item, slot, section.getString("permission"), MenuAction.getActions(section.getStringList("actions")));
 
 	}
 
