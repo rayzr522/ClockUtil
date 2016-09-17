@@ -16,3 +16,10 @@ menus:
         actions:
         - command:say Your text here
         - menu:default
+      Diamond:
+        name: '&bAnother item'
+        type: diamond
+        slot: 2,3
+        actions:
+        - command:give <name> diamond 3
+        - menu:default
