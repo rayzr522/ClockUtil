@@ -8,11 +8,11 @@ import com.rayzr522.clockutil.menu.IMenuAction;
 
 public class MenuActionMenu implements IMenuAction {
 
-	@Override
-	public void execute(Player player, String data) {
+    @Override
+    public void execute(Player player, String data) {
 
-		ClockUtil.openInventory(player, data);
+        ClockUtil.openInventory(player, data);
 
-	}
+    }
 
 }

@@ -12,64 +12,64 @@ import com.rayzr522.clockutil.utils.TextUtils;
 
 public class MenuAction {
 
-	private static final String	SEPARATOR	= "/_azX\\?";
+    private static final String SEPARATOR = "/_azX\\?";
 
-	private ActionType			type;
-	private String				data;
+    private ActionType          type;
+    private String              data;
 
-	private MenuAction(ActionType type, String data) {
+    private MenuAction(ActionType type, String data) {
 
-		this.type = type;
-		this.data = data.trim();
+        this.type = type;
+        this.data = data.trim();
 
-	}
+    }
 
-	public static List<MenuAction> getActions(List<String> stringList) {
+    public static List<MenuAction> getActions(List<String> stringList) {
 
-		List<MenuAction> actions = new ArrayList<MenuAction>();
+        List<MenuAction> actions = new ArrayList<MenuAction>();
 
-		for (String action : stringList) {
+        for (String action : stringList) {
 
-			String[] split = action.replaceFirst(":", SEPARATOR).split(SEPARATOR);
+            String[] split = action.replaceFirst(":", SEPARATOR).split(SEPARATOR);
 
-			ActionType type = ActionType.valueOf(TextUtils.enumFormat(split[0]));
-			actions.add(new MenuAction(type, split.length > 1 ? split[1].trim() : ""));
+            ActionType type = ActionType.valueOf(TextUtils.enumFormat(split[0]));
+            actions.add(new MenuAction(type, split.length > 1 ? split[1].trim() : ""));
 
-		}
+        }
 
-		return actions;
+        return actions;
 
-	}
+    }
 
-	public void execute(Player player) {
+    public void execute(Player player) {
 
-		switch (type) {
+        switch (type) {
 
-		case COMMAND:
-			new MenuActionCommand().execute(player, data);
-			break;
-		case MENU:
-			new MenuActionMenu().execute(player, data);
-			break;
-		default:
+            case COMMAND:
+                new MenuActionCommand().execute(player, data);
+                break;
+            case MENU:
+                new MenuActionMenu().execute(player, data);
+                break;
+            default:
 
-		}
+        }
 
-	}
+    }
 
-	public ActionType getType() {
-		return type;
-	}
+    public ActionType getType() {
+        return type;
+    }
 
-	public String getData() {
-		return data;
-	}
+    public String getData() {
+        return data;
+    }
 
-	public enum ActionType {
+    public enum ActionType {
 
-		COMMAND,
-		MENU
+        COMMAND,
+        MENU
 
-	}
+    }
 
 }

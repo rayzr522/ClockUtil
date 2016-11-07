@@ -6,6 +6,6 @@ import org.bukkit.command.CommandSender;
 
 public interface ICommand extends CommandExecutor {
 
-	public void showHelp(CommandSender sender);
+    public void showHelp(CommandSender sender);
 
 }

@@ -5,47 +5,49 @@ import java.io.File;
 
 public class ConfigManager {
 
-	private ClockUtil plugin;
+    private ClockUtil plugin;
 
-	public ConfigManager(ClockUtil plugin) {
+    public ConfigManager(ClockUtil plugin) {
 
-		this.plugin = plugin;
+        this.plugin = plugin;
 
-		if (!configYmlExists()) {
+        if (!configYmlExists()) {
 
-			plugin.saveResource("config.yml", true);
+            plugin.saveResource("config.yml", true);
 
-		}
+        }
 
-	}
+    }
 
-	public boolean configYmlExists() {
+    public boolean configYmlExists() {
 
-		return getFile("config.yml").exists();
+        return getFile("config.yml").exists();
 
-	}
+    }
 
-	public File getFile(String path) {
+    public File getFile(String path) {
 
-		return new File(plugin.getDataFolder() + File.separator + path);
+        return new File(plugin.getDataFolder() + File.separator + path);
 
-	}
+    }
 
-	public void backupConfig() {
+    public void backupConfig() {
 
-		if (!configYmlExists()) { return; }
+        if (!configYmlExists()) {
+            return;
+        }
 
-		File backupFile = getFile("config-backup.yml");
+        File backupFile = getFile("config-backup.yml");
 
-		if (backupFile.exists()) {
-			backupFile.delete();
-		}
+        if (backupFile.exists()) {
+            backupFile.delete();
+        }
 
-		File configYml = getFile("config.yml");
-		configYml.renameTo(backupFile);
+        File configYml = getFile("config.yml");
+        configYml.renameTo(backupFile);
 
-		plugin.saveResource("config.yml", true);
+        plugin.saveResource("config.yml", true);
 
-	}
+    }
 
 }

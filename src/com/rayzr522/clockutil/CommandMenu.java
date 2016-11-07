@@ -10,52 +10,52 @@ import com.rayzr522.clockutil.utils.Msg;
 
 public class CommandMenu implements ICommand {
 
-	@SuppressWarnings("unused")
-	private ClockUtil plugin;
+    @SuppressWarnings("unused")
+    private ClockUtil plugin;
 
-	public CommandMenu(ClockUtil plugin) {
-		this.plugin = plugin;
-	}
+    public CommandMenu(ClockUtil plugin) {
+        this.plugin = plugin;
+    }
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String command, String[] args) {
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String command, String[] args) {
 
-		if (!(sender instanceof Player)) {
-			Msg.player(sender, ChatColor.RED + "Only players can use this command");
-			return true;
-		}
+        if (!(sender instanceof Player)) {
+            Msg.player(sender, ChatColor.RED + "Only players can use this command");
+            return true;
+        }
 
-		Player player = (Player) sender;
+        Player player = (Player) sender;
 
-		if (args.length < 1) {
+        if (args.length < 1) {
 
-			if (!ClockUtil.openInventory(player, ClockUtil.DEFAULT_MENU)) {
+            if (!ClockUtil.openInventory(player, ClockUtil.DEFAULT_MENU)) {
 
-				showHelp(player);
+                showHelp(player);
 
-			}
+            }
 
-		} else if (args.length > 0) {
+        } else if (args.length > 0) {
 
-			String menuName = args[0];
+            String menuName = args[0];
 
-			if (!ClockUtil.openInventory(player, menuName)) {
+            if (!ClockUtil.openInventory(player, menuName)) {
 
-				Msg.player(player, ChatColor.RED + "No such menu!");
+                Msg.player(player, ChatColor.RED + "No such menu!");
 
-			}
+            }
 
-		}
+        }
 
-		return true;
+        return true;
 
-	}
+    }
 
-	@Override
-	public void showHelp(CommandSender sender) {
+    @Override
+    public void showHelp(CommandSender sender) {
 
-		sender.sendMessage(ChatColor.GOLD + "USAGE: " + ChatColor.YELLOW + "/menu [name]");
+        sender.sendMessage(ChatColor.GOLD + "USAGE: " + ChatColor.YELLOW + "/menu [name]");
 
-	}
+    }
 
 }

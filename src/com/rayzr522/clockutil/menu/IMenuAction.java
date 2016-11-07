@@ -5,6 +5,6 @@ import org.bukkit.entity.Player;
 
 public interface IMenuAction {
 
-	public void execute(Player player, String data);
+    public void execute(Player player, String data);
 
 }
