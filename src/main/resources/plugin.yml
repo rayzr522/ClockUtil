@@ -1,0 +1,14 @@
+name: ClockUtil
+main: com.rayzr522.clockutil.ClockUtil
+version: 1.2
+description: A configurable menu plugin with menu items and nested menus
+commands:
+  clockutil:
+    description: ClockUtil main command
+    usage: "\u00A7cRayzr broke something. *sigh*"
+  menu:
+    description: Opens a ClockUtil menu
+    usage: "\u00A7cGo pester Rayzr, his plugin broke again."
+  itemtype:
+    description: Tells you what type and data the item in your hand has
+    usage: "\u00A7cRayzr really needs to get his act together. His plugin broke AGAIN!"

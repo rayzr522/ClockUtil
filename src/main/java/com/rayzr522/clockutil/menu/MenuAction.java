@@ -1,21 +1,19 @@
-
 package com.rayzr522.clockutil.menu;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.entity.Player;
 
 import com.rayzr522.clockutil.menu.action.MenuActionCommand;
 import com.rayzr522.clockutil.menu.action.MenuActionMenu;
 import com.rayzr522.clockutil.utils.TextUtils;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuAction {
 
     private static final String SEPARATOR = "/_azX\\?";
 
-    private ActionType          type;
-    private String              data;
+    private ActionType type;
+    private String data;
 
     private MenuAction(ActionType type, String data) {
 

@@ -8,17 +8,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class ItemUtils {
 
     public static Material getType(String matString) {
-
         try {
-
             return Material.valueOf(TextUtils.enumFormat(matString));
-
         } catch (Exception e) {
-
             return Material.STONE;
-
         }
-
     }
 
     public static ItemStack nameItem(ItemStack item, String name) {

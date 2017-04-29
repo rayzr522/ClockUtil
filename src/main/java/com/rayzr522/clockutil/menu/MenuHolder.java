@@ -1,12 +1,10 @@
-
 package com.rayzr522.clockutil.menu;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
 public class MenuHolder implements InventoryHolder {
-
-    private Menu      menu;
+    private Menu menu;
     private Inventory inventory;
 
     public MenuHolder(Menu menu, Inventory inventory) {
@@ -22,5 +20,4 @@ public class MenuHolder implements InventoryHolder {
     public Inventory getInventory() {
         return inventory;
     }
-
 }

@@ -1,25 +1,22 @@
-
 package com.rayzr522.clockutil.menu;
 
-import java.util.Set;
-
+import com.rayzr522.clockutil.utils.TextUtils;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import com.rayzr522.clockutil.exception.ConfigFormatException;
-import com.rayzr522.clockutil.utils.TextUtils;
+import java.util.Objects;
 
 public class Menu {
-
     private MenuItem[] items;
 
-    private String     name;
-    private String     title;
-    private int        rows;
-    private String     permission;
+    private String name;
+    private String title;
+    private int rows;
+    private String permission;
 
     private Menu(String name, String title, int rows, String permission) {
 
@@ -33,28 +30,21 @@ public class Menu {
 
     }
 
-    public static Menu loadFromConfig(ConfigurationSection section) throws ConfigFormatException {
-
-        if (section == null) {
-            throw new IllegalArgumentException("Parameter 'section' must not be null");
-        } else if (!section.contains("title")) {
-            throw new ConfigFormatException("Menu", "title");
-        } else if (!section.contains("rows")) {
-            throw new ConfigFormatException("Menu", "rows");
-        } else if (!section.contains("items")) {
-            throw new ConfigFormatException("Menu", "items");
-        }
+    public static Menu loadFromConfig(ConfigurationSection section) {
+        Objects.requireNonNull(section, "section cannot be null!");
+        Validate.isTrue(section.contains("title"), "Menu is missing 'title'!");
+        Validate.isTrue(section.contains("rows"), "Menu is missing 'rows'!");
+        Validate.isTrue(section.contains("items"), "Menu is missing 'items'!");
 
         Menu menu = new Menu(section.getName(), section.getString("title"), section.getInt("rows"), section.getString("permission"));
 
-        Set<String> itemKeys = section.getConfigurationSection("items").getKeys(false);
+        ConfigurationSection itemsSection = section.getConfigurationSection("items");
 
-        for (String key : itemKeys) {
+        for (String key : itemsSection.getKeys(false)) {
+            ConfigurationSection itemSection = itemsSection.getConfigurationSection(key);
 
-            ConfigurationSection itemSection = section.getConfigurationSection("items." + key);
             MenuItem item = MenuItem.loadFromConfig(itemSection);
             menu.setItem(item.getSlot(), item);
-
         }
 
         return menu;
@@ -62,19 +52,21 @@ public class Menu {
     }
 
     public void setItem(int slot, MenuItem item) {
-
-        if (slot < 0 || slot >= items.length) {
-            return;
-        }
+        checkSlot(slot);
 
         items[slot] = item;
-
     }
 
     public MenuItem getItem(int slot) {
+        checkSlot(slot);
 
         return slot < 0 || slot >= items.length ? null : items[slot];
+    }
 
+    private void checkSlot(int slot) {
+        if (slot < 0 || slot >= items.length) {
+            throw new IllegalStateException("Slot must be between 0 and " + (items.length - 1));
+        }
     }
 
     public MenuItem[] getItems() {
@@ -102,7 +94,6 @@ public class Menu {
     }
 
     public Inventory open(Player player) {
-
         Inventory inv = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(player, rows * 9)), rows * 9, title);
 
         for (int i = 0; i < items.length; i++) {
